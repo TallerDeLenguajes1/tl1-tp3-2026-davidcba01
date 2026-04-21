@@ -29,24 +29,42 @@ int main() {
     printf("\n--- Lista de personas ---\n");
     MostrarPersonas(nombres, N);
 
-    int id;
-    printf("\nIngrese el ID a buscar: ");
-    scanf("%d", &id);
-    getchar(); // limpia el buffer, pues scanf deja un \n que interfiere con gets
+    int opcion;
 
-    BuscaNombrePorId(nombres, N, id);
+    printf("\n--- MENU ---\n");
+    printf("1. Buscar por ID\n");
+    printf("2. Buscar por nombre\n");
+    printf("Seleccione una opcion: ");
+    scanf("%d", &opcion);
+    getchar(); // limpiar buffer
 
-    char clave[50];
+    if(opcion == 1) {
+        int id;
+        printf("\nIngrese el ID a buscar: ");
+        scanf("%d", &id);
+        getchar(); // limpia el buffer, pues scanf deja un \n que interfiere con gets
 
-    printf("\nIngrese palabra a buscar: ");
-    gets(clave);
+        BuscaNombrePorId(nombres, N, id);
+    } else if(opcion == 2) {
+        char clave[50];
 
-    int resultado = BuscaNombrePorPalabra(nombres, N, clave);
+        printf("\nIngrese palabra a buscar: ");
+        gets(clave);
 
-    if(resultado != -1) {
-        printf("Nombre encontrado: %s\n", nombres[resultado]);
+        int resultado = BuscaNombrePorPalabra(nombres, N, clave);
+
+        if(resultado != -1) {
+            printf("Nombre encontrado: %s\n", nombres[resultado]);
+        } else {
+            printf("No se encontró el nombre\n");
+        }
     } else {
-        printf("No se encontró el nombre\n");
+        printf("Opcion invalida\n");
+    }
+
+    // LIBERAR MEMORIA
+    for(int i = 0; i < N; i++) {
+        free(nombres[i]);
     }
 
     return 0;
