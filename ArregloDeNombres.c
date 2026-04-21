@@ -4,6 +4,8 @@
 
 #define N 5 // cantidad de nombres
 
+void MostrarPersonas(char *nombres[], int n);
+
 int main() {
     char *nombres[N];   // vector de punteros
     char buff[50];    // auxiliar (nota 2)
@@ -22,5 +24,16 @@ int main() {
         strcpy(nombres[i], buff);
     }
 
+    printf("\n--- Lista de personas ---\n");
+    MostrarPersonas(nombres, N);
+
     return 0;
+}
+
+// 2. Implementar una función llamada MostrarPersonas que reciba el vector y muestre 
+// todos los nombres almacenados en él por pantalla.
+void MostrarPersonas(char *nombres[], int n) {
+    for(int i = 0; i < n; i++) {
+        printf("Persona %d: %s\n", i + 1, nombres[i]);
+    }
 }
