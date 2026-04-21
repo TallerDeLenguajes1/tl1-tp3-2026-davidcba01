@@ -5,7 +5,8 @@
 #define N 5 // cantidad de nombres
 
 void MostrarPersonas(char *nombres[], int n);
-int BuscarNombre(char *nombres[], int n, char *clave);
+void BuscaNombrePorId(char *nombres[], int n, int id);
+int BuscaNombrePorPalabra(char *nombres[], int n, char *clave);
 
 int main() {
     char *nombres[N];   // vector de punteros
@@ -28,12 +29,19 @@ int main() {
     printf("\n--- Lista de personas ---\n");
     MostrarPersonas(nombres, N);
 
+    int id;
+    printf("\nIngrese el ID a buscar: ");
+    scanf("%d", &id);
+    getchar(); // limpia el buffer, pues scanf deja un \n que interfiere con gets
+
+    BuscaNombrePorId(nombres, N, id);
+
     char clave[50];
 
     printf("\nIngrese palabra a buscar: ");
     gets(clave);
 
-    int resultado = BuscarNombre(nombres, N, clave);
+    int resultado = BuscaNombrePorPalabra(nombres, N, clave);
 
     if(resultado != -1) {
         printf("Nombre encontrado: %s\n", nombres[resultado]);
@@ -52,11 +60,23 @@ void MostrarPersonas(char *nombres[], int n) {
     }
 }
 
+// En este branch, implementar una función BuscarNombre que reciba un número 
+// entero positivo de ID (índice del vector) como entrada y Escribir por pantalla el 
+// nombre ubicado en esa posición dentro del vector. Si el número ingresado no 
+// pertenece al vector escribir “no se encontró el valor buscado”.
+void BuscaNombrePorId(char *nombres[], int n, int id) {
+    if(id >= 0 && id < n) {
+        printf("Nombre encontrado: %s\n", nombres[id]);
+    } else {
+        printf("No se encontró el valor buscado\n");
+    }
+}
+
 // Implementar una nueva versión de la función BuscarNombre. Esta versión 
 // deberá recibir una palabra clave como argumento y retornar el primer nombre 
 // dentro del vector que contenga dicha palabra. Si no existe, debería devolver -1. 
 // (Investigá el uso de la función strstr para esta implementación.)
-int BuscarNombre(char *nombres[], int n, char *clave) {
+int BuscaNombrePorPalabra(char *nombres[], int n, char *clave) {
     for(int i = 0; i < n; i++) {
         if(strstr(nombres[i], clave) != NULL) {
             return i; // devuelve posición
