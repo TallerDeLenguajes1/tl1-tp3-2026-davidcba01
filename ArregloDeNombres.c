@@ -5,6 +5,7 @@
 #define N 5 // cantidad de nombres
 
 void MostrarPersonas(char *nombres[], int n);
+int BuscarNombre(char *nombres[], int n, char *clave);
 
 int main() {
     char *nombres[N];   // vector de punteros
@@ -27,6 +28,19 @@ int main() {
     printf("\n--- Lista de personas ---\n");
     MostrarPersonas(nombres, N);
 
+    char clave[50];
+
+    printf("\nIngrese palabra a buscar: ");
+    gets(clave);
+
+    int resultado = BuscarNombre(nombres, N, clave);
+
+    if(resultado != -1) {
+        printf("Nombre encontrado: %s\n", nombres[resultado]);
+    } else {
+        printf("No se encontró el nombre\n");
+    }
+
     return 0;
 }
 
@@ -36,4 +50,17 @@ void MostrarPersonas(char *nombres[], int n) {
     for(int i = 0; i < n; i++) {
         printf("Persona %d: %s\n", i + 1, nombres[i]);
     }
+}
+
+// Implementar una nueva versión de la función BuscarNombre. Esta versión 
+// deberá recibir una palabra clave como argumento y retornar el primer nombre 
+// dentro del vector que contenga dicha palabra. Si no existe, debería devolver -1. 
+// (Investigá el uso de la función strstr para esta implementación.)
+int BuscarNombre(char *nombres[], int n, char *clave) {
+    for(int i = 0; i < n; i++) {
+        if(strstr(nombres[i], clave) != NULL) {
+            return i; // devuelve posición
+        }
+    }
+    return -1; // no encontrado
 }
