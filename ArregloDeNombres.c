@@ -5,6 +5,7 @@
 #define N 5 // cantidad de nombres
 
 void MostrarPersonas(char *nombres[], int n);
+void BuscarNombre(char *nombres[], int n, int id);
 
 int main() {
     char *nombres[N];   // vector de punteros
@@ -27,6 +28,12 @@ int main() {
     printf("\n--- Lista de personas ---\n");
     MostrarPersonas(nombres, N);
 
+    int id;
+    printf("\nIngrese el ID a buscar: ");
+    scanf("%d", &id);
+
+    BuscarNombre(nombres, N, id);
+
     return 0;
 }
 
@@ -35,5 +42,17 @@ int main() {
 void MostrarPersonas(char *nombres[], int n) {
     for(int i = 0; i < n; i++) {
         printf("Persona %d: %s\n", i + 1, nombres[i]);
+    }
+}
+
+// En este branch, implementar una función BuscarNombre que reciba un número 
+// entero positivo de ID (índice del vector) como entrada y Escribir por pantalla el 
+// nombre ubicado en esa posición dentro del vector. Si el número ingresado no 
+// pertenece al vector escribir “no se encontró el valor buscado”.
+void BuscarNombre(char *nombres[], int n, int id) {
+    if(id >= 0 && id < n) {
+        printf("Nombre encontrado: %s\n", nombres[id]);
+    } else {
+        printf("No se encontró el valor buscado\n");
     }
 }
