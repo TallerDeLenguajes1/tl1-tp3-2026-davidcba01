@@ -97,6 +97,35 @@ int main()
         }
     }
 
+    // v) Mostrar por pantalla todo lo cargado. Incluyendo un total a pagar por cliente 
+    // (sumatoria del costo de todos los productos)
+    printf("\n===== LISTADO COMPLETO =====\n");
+
+    for (int i = 0; i < n; i++) {
+
+        printf("\nCliente %d\n", clientes[i].ClienteID);
+        printf("Nombre: %s\n", clientes[i].NombreCliente);
+
+        float totalCliente = 0;
+
+        for (int j = 0; j < clientes[i].CantidadProductosAPedir; j++) {
+
+            Producto p = clientes[i].Productos[j];
+
+            printf("\n  Producto %d\n", p.ProductoID);
+            printf("  Tipo: %s\n", p.TipoProducto);
+            printf("  Cantidad: %d\n", p.Cantidad);
+            printf("  Precio Unitario: %.2f\n", p.PrecioUnitario);
+
+            float costo = calcularCostoTotalProducto(p);
+            printf("  Costo: %.2f\n", costo);
+
+            totalCliente += costo;
+        }
+
+        printf("\n>>> Total a pagar por cliente: %.2f\n", totalCliente);
+    }
+
     return 0;
 }
 
