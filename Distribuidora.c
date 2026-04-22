@@ -22,6 +22,8 @@ typedef struct
                         // “CantidadProductosAPedir”
 } Cliente;
 
+float calcularCostoTotalProducto(Producto p);
+
 int main()
 {
     // i) Desarrollar una interfaz por consola donde se solicite al usuario la cantidad de 
@@ -88,8 +90,20 @@ int main()
 
             // Precio (10 a 100)
             clientes[i].Productos[j].PrecioUnitario = (rand() % 91) + 10;
+
+            float costo = calcularCostoTotalProducto(clientes[i].Productos[j]);
+
+            printf("Producto %d - Costo: %.2f\n", j + 1, costo);
         }
     }
 
     return 0;
+}
+
+// iv) Implemente una función que calcule el costo total de un producto. Esta función debe 
+// recibir como parámetro el producto y devolver el resultado de calcular la Cantidad por 
+// el PrecioUnitario.
+float calcularCostoTotalProducto(Producto p)
+{
+    return p.Cantidad * p.PrecioUnitario;
 }
