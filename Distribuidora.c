@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct
 {
@@ -24,6 +25,7 @@ int main()
 
     printf("Ingrese la cantidad de clientes: ");
     scanf("%d", &n);
+    getchar(); // limpiar buffer (por el scanf anterior)
 
     Cliente *clientes;
 
@@ -36,6 +38,26 @@ int main()
     }
 
     printf("Memoria reservada para %d clientes\n", n);
+
+    for(int i = 0; i < n; i++)
+    {
+        char buffer[50];
+
+        printf("\nCliente %d\n", i + 1);
+
+        // ID
+        clientes[i].ClienteID = i + 1;
+
+        // Nombre
+        printf("Ingrese nombre: ");
+        gets(buffer);
+
+        // Reservar memoria exacta
+        clientes[i].NombreCliente = (char *) malloc((strlen(buffer) + 1) * sizeof(char));
+
+        // Copiar
+        strcpy(clientes[i].NombreCliente, buffer);
+    }
 
     return 0;
 }
